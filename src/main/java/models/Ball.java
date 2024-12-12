@@ -6,8 +6,9 @@ public class Ball {
     // Object Fields
     private Position position;
     private double radius;          // Used for scaling the collider tied to game scale
-    private Direction[] direction;  // Used for scaling the collider
+    private final Direction[] direction;  // Used for scaling the collider
     private double delta;           // Absolute rate of change in each axis equivalent to speed/frame-rate
+    private final Collider collider;
 
     // Constructor
     public Ball(Position position, double radius, int delta) {
@@ -15,6 +16,7 @@ public class Ball {
         this.radius = radius;
         this.direction = new Direction[] {Direction.NONE, Direction.NONE};
         this.delta = delta;
+        this.collider = new Collider(this.position,this.radius*2, this.radius*2);
     }
 
 
@@ -50,6 +52,8 @@ public class Ball {
                 break;
             case BOTTOM:
                 direction[0] = Direction.DOWN;
+                break;
+            case NONE:
                 break;
         }
     }
